@@ -6,6 +6,24 @@
 #include <algorithm>
 #include <iomanip>
 using namespace std;
+#include <fstream>
+
+class FileLogger {
+public:
+    static void log(const string &msg) {
+        
+        ofstream out("log.txt", ios::app);  // append mode
+
+        if (!out) {
+            cout << "Error opening log file!\n";
+            return;
+        }
+
+        out << msg << "\n";
+
+        out.close();
+    }
+};
 
 
 struct vehicle {
@@ -56,6 +74,8 @@ cin >> v.company;
      company_count[v.company] =company_count[v.company] + 1;
 
         cout << "Vehicle Registered Successfully!\n";
+        FileLogger::log("Registered Vehicle: " + to_string(v.Registration_number));
+
     }
 
     void search_vehicle() {
@@ -78,6 +98,8 @@ cin >> v.company;
         else {
             cout << "Vehicle Not Found!\n";
         }
+        FileLogger::log("Searched Vehicle: " + to_string(reg));
+
     }
 
     void searchByOwner() {
@@ -100,6 +122,8 @@ cin >> v.company;
 
         if (!found)
             cout << "No vehicle found for owner: " << owner << endl;
+            FileLogger::log("Search by owner: " + owner);
+
     }
 
 
@@ -127,6 +151,8 @@ cin >> v.company;
         }
 
         cout << "Owner Updated Successfully!\n";
+        FileLogger::log("Updated owner of: " + to_string(reg));
+
     }
 
     void deleteVehicle() {
@@ -153,6 +179,8 @@ cin >> v.company;
             company_count.erase(v.vehicle_type);
 
         cout << "Vehicle Deleted Successfully!\n";
+        FileLogger::log("Deleted Vehicle: " + to_string(reg));
+
     }
 
 
@@ -182,6 +210,14 @@ cin >> v.company;
                 << setw(15) << v.model_year << "\n";
         }
         cout << "----------------------------------------------------------------\n";
+        for (auto &v : vechicles) {
+    FileLogger::log("RegNo=" + to_string(v.Registration_number) +
+                    ", Owner=" + v.owner_name +
+                    ", Type=" + v.vehicle_type +
+                    ", Company=" + v.company +
+                    ", Year=" + to_string(v.model_year));
+}
+
     }
 };
 
@@ -231,8 +267,11 @@ while (true) {
         break;
 
     case 7:
-        cout << "\nExiting program...\n";
-        return 0;
+    FileLogger::log("User selected choice: " + to_string(choice));
+
+            cout << "\nExiting program...\n";
+            return 0;
+
 
     default:
         cout << "\nInvalid choice! Try again.\n";
