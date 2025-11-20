@@ -7,9 +7,7 @@
 #include <iomanip>
 using namespace std;
 
-// ----------------------------
-// STRUCT (YOUR ORIGINAL STRUCT)
-// ----------------------------
+
 struct vehicle {
     int Registration_number;
     string owner_name;
@@ -18,9 +16,7 @@ struct vehicle {
      string company; 
 };
 
-// ----------------------------
-// VEHICLE SYSTEM CLASS
-// ----------------------------
+
 class vechicleSystem {
 
 private:
@@ -31,9 +27,7 @@ private:
 
 public:
 
-    // ----------------------------
-    // REGISTER VEHICLE
-    // ----------------------------
+ 
     void register_vechicle() {
         vehicle v;
 
@@ -64,9 +58,6 @@ cin >> v.company;
         cout << "Vehicle Registered Successfully!\n";
     }
 
-    // ----------------------------
-    // SEARCH BY REG NUMBER
-    // ----------------------------
     void search_vehicle() {
 
         int reg;
@@ -89,9 +80,6 @@ cin >> v.company;
         }
     }
 
-    // ----------------------------
-    // SEARCH BY OWNER NAME
-    // ----------------------------
     void searchByOwner() {
         string owner;
         cout << "Enter Owner Name: ";
@@ -114,9 +102,7 @@ cin >> v.company;
             cout << "No vehicle found for owner: " << owner << endl;
     }
 
-    // ----------------------------
-    // UPDATE OWNER NAME
-    // ----------------------------
+
     void update_vehicle_owner() {
         int reg;
         cout << "Enter Registration Number: ";
@@ -143,9 +129,6 @@ cin >> v.company;
         cout << "Owner Updated Successfully!\n";
     }
 
-    // ----------------------------
-    // DELETE VEHICLE
-    // ----------------------------
     void deleteVehicle() {
         int reg;
         cout << "Enter Registration Number to Delete: ";
@@ -172,9 +155,7 @@ cin >> v.company;
         cout << "Vehicle Deleted Successfully!\n";
     }
 
-    // ----------------------------
-    // LIST ALL VEHICLES
-    // ----------------------------
+
     void listAllVehicles() {
 
         if (vechicles.empty()) {
@@ -204,20 +185,60 @@ cin >> v.company;
     }
 };
 
-// ----------------------------
-// MAIN
-// ----------------------------
+
 int main() {
 
-    vechicleSystem vs;
+int choice;
 
-    vs.register_vechicle();
-    vs.listAllVehicles();
-    vs.search_vehicle();
-    vs.searchByOwner();
-    vs.update_vehicle_owner();
-    vs.deleteVehicle();
-    vs.listAllVehicles();
+while (true) {
 
-    return 0;
+    cout << "\n========= VEHICLE MANAGEMENT SYSTEM =========\n";
+    cout << "Choice 1: Register Vehicle\n";
+    cout << "Choice 2: Search by Registration Number\n";
+    cout << "Choice 3: Search by Owner Name\n";
+    cout << "Choice 4: Update Owner Name\n";
+    cout << "Choice 5: Delete Vehicle\n";
+    cout << "Choice 6: List All Vehicles\n";
+    cout << "Choice 7: Exit\n";
+    cout << "----------------------------------------------\n";
+    cout << "Enter your choice: ";
+    cin >> choice;
+
+    switch (choice) {
+
+    case 1:
+        vs.register_vechicle();
+        break;
+
+    case 2:
+        vs.search_vehicle();
+        break;
+
+    case 3:
+        vs.searchByOwner();
+        break;
+
+    case 4:
+        vs.update_vehicle_owner();
+        break;
+
+    case 5:
+        vs.deleteVehicle();
+        break;
+
+    case 6:
+        vs.listAllVehicles();
+        break;
+
+    case 7:
+        cout << "\nExiting program...\n";
+        return 0;
+
+    default:
+        cout << "\nInvalid choice! Try again.\n";
+    }
+}
+
+return 0;
+
 }
