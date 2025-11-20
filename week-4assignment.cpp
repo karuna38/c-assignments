@@ -187,7 +187,7 @@ cin >> v.company;
 
 
 int main() {
-
+vechicleSystem vs;
 int choice;
 
 while (true) {
